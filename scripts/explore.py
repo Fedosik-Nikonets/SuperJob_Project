@@ -24,11 +24,20 @@ def get(**params):
         return None
     return r.json()
 
+
 data = get(count=1, town=4)
 vac = data["objects"][0]
 print("поля вакансии:", sorted(vac.keys()))
-for key in ["id", "profession", "payment_from", "payment_to", "currency",
-            "date_published", "town", "firm_name"]:
+for key in [
+    "id",
+    "profession",
+    "payment_from",
+    "payment_to",
+    "currency",
+    "date_published",
+    "town",
+    "firm_name",
+]:
     print(f"  {key}: {vac.get(key)!r}")
 
 print("\ntotal без фильтров:", data["total"])

@@ -1,7 +1,7 @@
 [project]
 name = "superjob-project"
 version = "0.1.0"
-description = "Add your description here"
+description = "Сбор вакансий SuperJob и анализ зарплат"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -23,3 +23,10 @@ dev = [
     "ruff>=0.17.3",
     "types-requests>=2.33.0.20261030",
 ]
+
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
