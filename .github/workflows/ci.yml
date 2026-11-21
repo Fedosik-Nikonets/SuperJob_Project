@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Скачать код репозитория
+        uses: actions/checkout@v7
+
+      - name: Установить uv
+        uses: astral-sh/setup-uv@v9
+        with:
+          version: "0.12.10"
+
+      - name: Установить Python
+        run: uv python install
+
+      - name: Установить зависимости
+        run: uv sync --locked --group dev
+
+      - name: Проверить код Ruff
+        run: uv run --locked ruff check scripts src tests
+
+      - name: Проверить форматирование
+        run: uv run --locked ruff format --check scripts src tests
+
+      - name: Проверить типы
+        run: uv run --locked mypy src
+
+      - name: Запустить тесты
+        run: uv run --locked pytest -q
